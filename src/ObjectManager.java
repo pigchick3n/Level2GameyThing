@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ObjectManager {
 ShootyThing cannon;
-Projectile bullet;
+
 ArrayList<Projectile> projectiles;
 long enemyTimer = 0;
 int enemySpawnTime = 1000;
@@ -15,8 +15,7 @@ public ObjectManager(ShootyThing bob){
 	score = 0;
 }
 
-void update(int arrow) {
-	bullet.update(arrow);
+void update() {
 	for (int i = 0; i < projectiles.size(); i++) {
 		projectiles.get(i).update();
 	}
@@ -24,8 +23,12 @@ void update(int arrow) {
 }
 void draw(Graphics g) {
 cannon.draw(g);
-
-
+for (int i = 0; i < projectiles.size(); i++) {
+	projectiles.get(i).draw(g);
+}
+}
+void addProjectile(Projectile p) {
+	projectiles.add(p);
 }
 	
 public int getScore() {

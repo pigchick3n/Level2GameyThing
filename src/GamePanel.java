@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (currentState == MENU_STATE) {
 			updateMenuState();
 		} else if (currentState == GAME_STATE) {
-			updateGameState(5);
+			updateGameState();
 		} else if (currentState == END_STATE) {
 			updateEndState();
 		}
@@ -89,15 +89,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			om = new ObjectManager(st);
 		}
 		
-		if((currentState == GAME_STATE)&&(keycode == 37)) {
-			updateGameState(1);
-		}else if((currentState == GAME_STATE)&&(keycode == 39)) {
-			updateGameState(2);
-		}else if((currentState == GAME_STATE)&&(keycode == 38)) {
-			updateGameState(3);
-		}else if((currentState == GAME_STATE)&&(keycode == 40)) {
-			updateGameState(4);
-		}
+		if((currentState == GAME_STATE)&&(keycode == 32)) {
+			om.addProjectile(new Projectile(st.x+20, st.y, 10, 10));
+	}
 	}
 
 	@Override
@@ -110,14 +104,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	}
 
-	void updateGameState(int arrow) {
+	void updateGameState() {
 		
 		if(st.isAlive == false) {
 			currentState = END_STATE;
+		}
+				om.update();
 				
-				om.update(arrow);
 				
-				}
 		}
 	
 

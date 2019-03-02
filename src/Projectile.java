@@ -14,16 +14,8 @@ public class Projectile extends GameObject{
 			 }
 	  
 
-void update(int arrow){
+void update(){
 	 super.update();
-if (arrow == 1) {
-	x-=speed;
-}else if (arrow == 2) {
-	x+=speed;
-}else if (arrow == 3) {
-	y-=speed;
-}else if (arrow == 4) {
-	y+=speed;
-}
+y-=10;
 }
 }
