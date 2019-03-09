@@ -23,20 +23,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font enterFont;
 
-
-
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
-		st = new ShootyThing(725,850,50,50);
+		st = new ShootyThing(725, 850, 50, 50);
 		om = new ObjectManager(st);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 25);
 
-    }
-
-
-
-	
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -70,14 +64,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("sup");
+
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int keycode = e.getKeyCode();
 		// TODO Auto-generated method stub
-		System.out.println(keycode);
 		if ((keycode == 10) && (currentState == MENU_STATE)) {
 			currentState = GAME_STATE;
 		} else if ((keycode == 10) && (currentState == GAME_STATE)) {
@@ -85,19 +78,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		} else if ((keycode == 10) && (currentState == END_STATE)) {
 			currentState = MENU_STATE;
-			st = new ShootyThing(725,700,50,50);
+			st = new ShootyThing(725, 850, 50, 50);
 			om = new ObjectManager(st);
 		}
-		
-		if((currentState == GAME_STATE)&&(keycode == 32)) {
-			om.addProjectile(new Projectile(st.x+20, st.y, 10, 10));
-	}
+
+		if ((currentState == GAME_STATE) && (keycode == 32)) {
+			om.addProjectile(new Projectile(st.x + 20, st.y, 10, 10, st.angle));
+		}
+		if (keycode == 37) {
+			st.turn(1);
+		}
+		if (keycode == 39) {
+			st.turn(-1);
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("oof");
+
 	}
 
 	void updateMenuState() {
@@ -105,15 +104,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-		
-		if(st.isAlive == false) {
+
+		if (st.isAlive == false) {
 			currentState = END_STATE;
 		}
-				om.update();
-				
-				
-		}
-	
+		om.update();
+
+	}
 
 	void updateEndState() {
 
@@ -129,13 +126,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Press ENTER to start", 615, 350);
 
 	}
+
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
 		om.draw(g);
 	}
-
-
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);

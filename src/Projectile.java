@@ -1,21 +1,31 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Projectile extends GameObject{
+public class Projectile extends GameObject {
 	int speed;
- public Projectile(int x, int y, int width, int height) {
-	super(x, y, width, height);
-	speed = 10;
- }
+	double speedY;
+	double speedX;
+	double angle;
 
-	  void draw(Graphics g) {
-		   g.setColor(Color.BLUE);
-	        g.fillRect(x, y, width, height);
-			 }
-	  
+	public Projectile(int x, int y, int width, int height, double angle) {
+		super(x, y, width, height);
+		speed = 10;
+		this.angle = angle;
+		System.out.println(angle);
+		speedY = speed * (1 - (Math.abs(angle / 90.0)));
+		speedX = speed * (angle / 90.0);
+	}
 
-void update(){
-	 super.update();
-y-=10;
-}
+	void draw(Graphics g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(x, y, width, height);
+	}
+
+	void update() {
+		super.update();
+
+		y -= speedY;
+
+		x -= speedX;
+	}
 }
