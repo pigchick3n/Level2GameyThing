@@ -2,7 +2,7 @@
 import java.awt.Graphics;
 
 	public class ShootyThing  extends GameObject{
-	double angle;
+	int angle;
 	int speed;
 		public ShootyThing(int x, int y, int width, int height) {
 			super(x, y, width, height);
@@ -14,6 +14,7 @@ import java.awt.Graphics;
 	 void draw(Graphics g) {
 		 g.setColor(Color.BLUE);
 	        g.fillRect(x, y, width, height);
+	     
 	 }
 	 void turn(double deg) {
 		 this.angle += deg;

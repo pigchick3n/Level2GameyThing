@@ -5,9 +5,9 @@ public class Projectile extends GameObject {
 	int speed;
 	double speedY;
 	double speedX;
-	double angle;
+int angle;
 
-	public Projectile(int x, int y, int width, int height, double angle) {
+	public Projectile(int x, int y, int width, int height, int angle) {
 		super(x, y, width, height);
 		speed = 10;
 		this.angle = angle;
@@ -19,6 +19,8 @@ public class Projectile extends GameObject {
 	void draw(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect(x, y, width, height);
+		 g.setColor(Color.RED);
+	        g.fillRect(0,0, width, height);
 	}
 
 	void update() {

@@ -86,10 +86,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			om.addProjectile(new Projectile(st.x + 20, st.y, 10, 10, st.angle));
 		}
 		if (keycode == 37) {
-			st.turn(1);
+			st.turn(2);
 		}
 		if (keycode == 39) {
-			st.turn(-1);
+			st.turn(-2);
 		}
 	}
 
