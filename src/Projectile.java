@@ -19,8 +19,7 @@ int angle;
 	void draw(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect(x, y, width, height);
-		 g.setColor(Color.RED);
-	        g.fillRect(0,0, width, height);
+	
 	}
 
 	void update() {

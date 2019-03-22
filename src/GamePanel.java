@@ -87,9 +87,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (keycode == 37) {
 			st.turn(2);
+			om.setCrosshairPosition(st.angle);
 		}
 		if (keycode == 39) {
 			st.turn(-2);
+			om.setCrosshairPosition(st.angle);
 		}
 	}
 
