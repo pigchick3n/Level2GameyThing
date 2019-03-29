@@ -9,7 +9,7 @@ int angle;
 
 	public Projectile(int x, int y, int width, int height, int angle) {
 		super(x, y, width, height);
-		speed = 10;
+		speed = 40;
 		this.angle = angle;
 		System.out.println(angle);
 		speedY = speed * (1 - (Math.abs(angle / 90.0)));

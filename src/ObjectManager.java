@@ -40,11 +40,8 @@ void addProjectile(Projectile p) {
 public int getScore() {
     return score;
 }
-void setCrosshairPosition(int angle) {
-	double speedY = 1*(1-Math.abs(Math.sin(angle)));
-	double speedX = 1*(Math.cos(angle));
-	crosshairY = (int) (850 +5*speedY);
-
-	crosshairX = (int) (745 +5*speedX);
+void setCrosshairPosition(int angle, Graphics g) {
+	g.drawLine(cannon.x + 20, cannon.y, (int)(200*(cannon.getAngle() / 90.0)), (int) (200*(1 - (Math.abs(cannon.getAngle() / 90.0))))); 
+	
 }
 }

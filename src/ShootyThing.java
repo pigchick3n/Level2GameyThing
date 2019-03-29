@@ -19,6 +19,10 @@ import java.awt.Graphics;
 	 void turn(double deg) {
 		 this.angle += deg;
 	 }
+	 int getAngle () {
+		return angle;
+		 
+	 }
 	}
 
 

@@ -57,7 +57,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		} else if (currentState == GAME_STATE) {
 			drawGameState(g);
 		} else if (currentState == END_STATE) {
-			drawEndState(g);
+			drawEndState(g); 
 		}
 	}
 
@@ -87,11 +87,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (keycode == 37) {
 			st.turn(2);
-			om.setCrosshairPosition(st.angle);
+			
 		}
 		if (keycode == 39) {
 			st.turn(-2);
-			om.setCrosshairPosition(st.angle);
+			
 		}
 	}
 
@@ -133,6 +133,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
 		om.draw(g);
+		om.setCrosshairPosition(st.angle,g);
+		
 	}
 
 	void drawEndState(Graphics g) {
