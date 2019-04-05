@@ -5,20 +5,22 @@ public class Projectile extends GameObject {
 	int speed;
 	double speedY;
 	double speedX;
-int angle;
+double angle;
 
-	public Projectile(int x, int y, int width, int height, int angle) {
+	public Projectile(int x, int y, int width, int height, double angle) {
 		super(x, y, width, height);
 		speed = 40;
 		this.angle = angle;
 		System.out.println(angle);
-		speedY = speed * (1 - (Math.abs(angle / 90.0)));
-		speedX = speed * (angle / 90.0);
+		//speedY = speed * (1 - (Math.abs(angle / 90.0)));
+		//speedX = speed * (angle / 90.0);
+		speedX = Math.sin(-angle);
+		speedY = Math.cos(angle);
 	}
 
 	void draw(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		g.fillRect((int)x, (int)y, width, height);
 	
 	}
 

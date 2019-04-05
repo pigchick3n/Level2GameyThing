@@ -2,8 +2,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class GameObject {
-	int x;
-	int y;
+	double x;
+	double y;
 	int width;
 	int height;
 	boolean isAlive;
@@ -19,7 +19,7 @@ public class GameObject {
 	}
 
 	void update() {
-		collisionBox.setBounds(x, y, width, height);
+		collisionBox.setBounds((int)x, (int)y, width, height);
 	}
 
 	void draw(Graphics g) {
