@@ -9,13 +9,13 @@ double angle;
 
 	public Projectile(int x, int y, int width, int height, double angle) {
 		super(x, y, width, height);
-		speed = 40;
+		speed = 10;
 		this.angle = angle;
 		System.out.println(angle);
 		//speedY = speed * (1 - (Math.abs(angle / 90.0)));
 		//speedX = speed * (angle / 90.0);
-		speedX = Math.sin(-angle);
-		speedY = Math.cos(angle);
+		speedX = speed*Math.sin(-angle);
+		speedY = speed*Math.cos(angle);
 	}
 
 	void draw(Graphics g) {
@@ -27,8 +27,8 @@ double angle;
 	void update() {
 		super.update();
 
-		y -= speedY;
+		y += speedY;
 
-		x -= speedX;
+		x += speedX;
 	}
 }

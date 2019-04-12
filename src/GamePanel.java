@@ -86,11 +86,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			om.addProjectile(new Projectile((int)st.x + 20, (int)st.y, 10, 10, st.angle));
 		}
 		if (keycode == 37) {
-			st.turn(0.02);
+			st.turn(-0.02);
 			
 		}
 		if (keycode == 39) {
-			st.turn(-0.02);
+			st.turn(0.02);
 			
 		}
 	}
@@ -98,7 +98,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		int keycode = e.getKeyCode();
+		if (keycode == 37) {
+			st.turn(0);
+			
+		}
+		if (keycode == 39) {
+			st.turn(0);
+			
+		}
 	}
 
 	void updateMenuState() {

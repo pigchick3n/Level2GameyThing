@@ -22,7 +22,7 @@ void update() {
 	for (int i = 0; i < projectiles.size(); i++) {
 		projectiles.get(i).update();
 	}
-	
+	cannon.update();
 }
 void draw(Graphics g) {
 cannon.draw(g);
@@ -41,7 +41,9 @@ public int getScore() {
     return score;
 }
 void setCrosshairPosition(double angle, Graphics g) {
-	g.drawLine((int)cannon.x + 20, (int)cannon.y, (int)(200*Math.sin(-cannon.getAngle())), (int) (200*Math.cos(cannon.getAngle()))); 
+	int endX = (int)(cannon.x + 25 +(200*Math.sin(-cannon.getAngle())));
+	int endY = (int)(cannon.y + (200*Math.cos(cannon.getAngle())));
+	g.drawLine((int)cannon.x + 25, (int)cannon.y, endX, endY); 
 	
 }
 }

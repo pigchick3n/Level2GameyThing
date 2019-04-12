@@ -13,7 +13,7 @@
 		y+=speed;
 	}
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(Color.red);
 		g.fillRect((int)x, (int)y, width, height);
 	}
 	}
