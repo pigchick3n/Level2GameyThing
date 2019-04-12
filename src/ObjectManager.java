@@ -7,6 +7,7 @@ public class ObjectManager {
 ShootyThing cannon;
 
 ArrayList<Projectile> projectiles;
+ArrayList<Emu> emus;
 long enemyTimer = 0;
 int enemySpawnTime = 1000;
 int score;

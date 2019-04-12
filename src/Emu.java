@@ -17,5 +17,3 @@
 		g.fillRect((int)x, (int)y, width, height);
 	}
 	}
-
-
