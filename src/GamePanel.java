@@ -83,7 +83,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if ((currentState == GAME_STATE) && (keycode == 32)) {
-			om.addProjectile(new Projectile((int)st.x + 20, (int)st.y, 10, 10, st.angle));
+			om.addProjectile(true);
 		}
 		if (keycode == 37) {
 			st.turn(-0.02);
@@ -107,6 +107,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			st.turn(0);
 			
 		}
+		if ((currentState == GAME_STATE) && (keycode == 32)) {
+			om.addProjectile(false);
+		}
 	}
 
 	void updateMenuState() {
@@ -119,7 +122,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			currentState = END_STATE;
 		}
 		om.update();
-
+		om.manageEnemies();
 	}
 
 	void updateEndState() {
