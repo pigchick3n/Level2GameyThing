@@ -86,11 +86,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			om.addProjectile(true);
 		}
 		if (keycode == 37) {
-			st.turn(-0.02);
+			st.turn(-0.08);
 			
 		}
 		if (keycode == 39) {
-			st.turn(0.02);
+			st.turn(0.08);
 			
 		}
 	}
@@ -123,6 +123,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		om.update();
 		om.manageEnemies();
+		om.checkCollision();
+		om.purgeObjects();
 	}
 
 	void updateEndState() {

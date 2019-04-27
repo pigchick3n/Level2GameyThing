@@ -6,7 +6,7 @@
 		int speed;
 	public Emu(int x, int y, int width, int height) {
 		super(x,y,width,height);
-		speed=10;
+		speed=5;
 	}
 	void update() {
 		super.update();

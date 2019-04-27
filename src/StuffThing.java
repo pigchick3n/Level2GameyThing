@@ -26,7 +26,7 @@ public class StuffThing {
 		frame.pack();
 		gp.startGame();
 	}
-	}
+	}   
 
 
 
