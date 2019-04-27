@@ -31,12 +31,12 @@ public class ObjectManager {
 		}
 		if (isShooting) {
 
-			//if (System.currentTimeMillis() - shootTimer >= shootySpawnTime) {
+			if (System.currentTimeMillis() - shootTimer >= shootySpawnTime) {
 				Projectile p = new Projectile((int) cannon.x + 20, (int) cannon.y, 10, 10, cannon.angle);
 				projectiles.add(p);
-				//shootTimer = System.currentTimeMillis();
+				shootTimer = System.currentTimeMillis();
 			}
-	//	}
+		}
 
 		cannon.update();
 		for (int i = 0; i < emus.size(); i++) {
