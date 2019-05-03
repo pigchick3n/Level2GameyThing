@@ -147,7 +147,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
 		om.draw(g);
 		om.setCrosshairPosition(st.angle,g);
-		
+		g.setFont(enterFont);
+		g.drawString("You killed " + om.getScore() + " enemies", 1, 20);
 	}
 
 	void drawEndState(Graphics g) {

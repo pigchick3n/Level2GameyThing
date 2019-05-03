@@ -12,7 +12,7 @@ public class ObjectManager {
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
 	long shootTimer = 0;
-	int shootySpawnTime = 500;
+	int shootySpawnTime = 0;
 	int score;
 	int crosshairX;
 	int crosshairY;
@@ -31,11 +31,11 @@ public class ObjectManager {
 		}
 		if (isShooting) {
 
-			if (System.currentTimeMillis() - shootTimer >= shootySpawnTime) {
+		//	if (System.currentTimeMillis() - shootTimer >= shootySpawnTime) {
 				Projectile p = new Projectile((int) cannon.x + 20, (int) cannon.y, 10, 10, cannon.angle);
 				projectiles.add(p);
-				shootTimer = System.currentTimeMillis();
-			}
+			//	shootTimer = System.currentTimeMillis();
+		//	}
 		}
 
 		cannon.update();
@@ -68,17 +68,17 @@ public class ObjectManager {
 	void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
 			addEmu(new Emu(new Random().nextInt(StuffThing.width), 0, 50, 50));
-			enemyTimer = System.currentTimeMillis();
+			//enemyTimer = System.currentTimeMillis();
 		}
 
 	}
 
 	void purgeObjects() {
-		for (int i = 0; i < projectiles.size(); i++) {
-			if (projectiles.get(i).isAlive == false) {
-				projectiles.remove(i);
-			}
-		}
+	//	for (int i = 0; i < projectiles.size(); i++) {
+		//	if (projectiles.get(i).isAlive == false) {
+		//		projectiles.remove(i);
+	//		}
+	//	}
 		for (int i = 0; i < emus.size(); i++) {
 			if (emus.get(i).isAlive == false) {
 				emus.remove(i);
@@ -96,6 +96,7 @@ public class ObjectManager {
 					projectiles.get(i).isAlive = false;
 					a.isAlive = false;
 					score += 1;
+					System.out.println(score);
 				}
 			}
 
