@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int currentState = 0;
 	Font titleFont;
 	Font enterFont;
+	double turnSpeed = 0.08;
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
@@ -70,6 +71,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int keycode = e.getKeyCode();
+		System.out.println(keycode);
 		// TODO Auto-generated method stub
 		if ((keycode == 10) && (currentState == MENU_STATE)) {
 			currentState = GAME_STATE;
@@ -86,12 +88,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			om.addProjectile(true);
 		}
 		if (keycode == 37) {
-			st.turn(-0.08);
+			st.turn(-turnSpeed);
 			
 		}
 		if (keycode == 39) {
-			st.turn(0.08);
+			st.turn(turnSpeed);
 			
+		}
+		if (keycode == 16) {
+			turnSpeed = 0.04;
 		}
 	}
 
@@ -109,6 +114,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if ((currentState == GAME_STATE) && (keycode == 32)) {
 			om.addProjectile(false);
+		}
+		if (keycode == 16) {
+			turnSpeed = 0.08;
 		}
 	}
 
@@ -150,7 +158,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(enterFont);
 		g.drawString("You killed " + om.getScore() + " enemies", 1, 20);
 	}
-
+	void drawUpgradeState(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
+		g.setColor(Color.BLACK);
+		g.setFont(titleFont);
+		g.drawString("UPGRADES", 100, 200);
+		g.setFont(enterFont);
+		g.drawString("ERROR", 120, 350);
+		g.drawString("You killed " + om.getScore() + " enemies", 120, 350);
+		g.drawString("Press ENTER to continue", 100, 600);
+	}
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
@@ -159,6 +177,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("GAME OVER", 100, 200);
 		g.setFont(enterFont);
 		g.drawString("You killed " + om.getScore() + " enemies", 120, 350);
-		g.drawString("Press ENTER to start", 100, 600);
+		g.drawString("Press ENTER to restart", 100, 600);
 	}
 }

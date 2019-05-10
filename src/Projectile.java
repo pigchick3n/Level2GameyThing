@@ -17,13 +17,10 @@ double angle;
 		speedX = speed*Math.sin(-angle);
 		speedY = speed*Math.cos(angle);
 	}
-
 	void draw(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect((int)x, (int)y, width, height);
-	
 	}
-
 	void update() {
 		super.update();
 
