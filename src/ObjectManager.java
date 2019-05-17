@@ -16,13 +16,14 @@ public class ObjectManager {
 	int score;
 	int crosshairX;
 	int crosshairY;
-
+	public static int lives;
 	public ObjectManager(ShootyThing bob) {
 		cannon = bob;
 		projectiles = new ArrayList<Projectile>();
 		emus = new ArrayList<Emu>();
 		score = 0;
 		isShooting = false;
+		lives = 5;
 	}
 
 	void update() {
@@ -37,7 +38,7 @@ public class ObjectManager {
 			shootTimer = System.currentTimeMillis();
 		}
 		}
-
+		
 		cannon.update();
 		for (int i = 0; i < emus.size(); i++) {
 			emus.get(i).update();

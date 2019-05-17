@@ -133,6 +133,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		om.manageEnemies();
 		om.checkCollision();
 		om.purgeObjects();
+		if(ObjectManager.lives == 0) {
+			currentState = END_STATE;
+		}
 	}
 
 	void updateEndState() {
@@ -157,6 +160,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		om.setCrosshairPosition(st.angle,g);
 		g.setFont(enterFont);
 		g.drawString("You killed " + om.getScore() + " enemies", 1, 20);
+		g.drawString("You have " + ObjectManager.lives + " lives left", 300, 20);
 	}
 	void drawUpgradeState(Graphics g) {
 		g.setColor(Color.WHITE);
