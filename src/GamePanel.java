@@ -16,6 +16,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer t;
 	ShootyThing st;
 	ObjectManager om;
+	Upgrades u;
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -27,7 +28,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
 		st = new ShootyThing(725, 850, 50, 50);
-		om = new ObjectManager(st);
+		om = new ObjectManager(st, u);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 25);
 
@@ -58,7 +59,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		} else if (currentState == GAME_STATE) {
 			drawGameState(g);
 		} else if (currentState == END_STATE) {
-			drawEndState(g); 
+			drawEndState(g);
 		}
 	}
 
@@ -81,7 +82,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		} else if ((keycode == 10) && (currentState == END_STATE)) {
 			currentState = MENU_STATE;
 			st = new ShootyThing(725, 850, 50, 50);
-			om = new ObjectManager(st);
+			u = new Upgrades(0, 1500, 300,900);
+			om = new ObjectManager(st, u);
 		}
 
 		if ((currentState == GAME_STATE) && (keycode == 32)) {
@@ -89,14 +91,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (keycode == 37) {
 			st.turn(-turnSpeed);
-			
+
 		}
 		if (keycode == 39) {
 			st.turn(turnSpeed);
-			
+
 		}
 		if (keycode == 16) {
-			turnSpeed = 0.04;
+			turnSpeed = 0.02;
 		}
 	}
 
@@ -106,11 +108,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		int keycode = e.getKeyCode();
 		if (keycode == 37) {
 			st.turn(0);
-			
+
 		}
 		if (keycode == 39) {
 			st.turn(0);
-			
+
 		}
 		if ((currentState == GAME_STATE) && (keycode == 32)) {
 			om.addProjectile(false);
@@ -133,7 +135,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		om.manageEnemies();
 		om.checkCollision();
 		om.purgeObjects();
-		if(ObjectManager.lives == 0) {
+		if (ObjectManager.lives == 0) {
 			currentState = END_STATE;
 		}
 	}
@@ -157,22 +159,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
 		om.draw(g);
-		om.setCrosshairPosition(st.angle,g);
+		om.setCrosshairPosition(st.angle, g);
 		g.setFont(enterFont);
 		g.drawString("You killed " + om.getScore() + " enemies", 1, 20);
 		g.drawString("You have " + ObjectManager.lives + " lives left", 300, 20);
+		g.drawString("You have " + ObjectManager.emubucks + " emubucks", 600, 20);
 	}
-	void drawUpgradeState(Graphics g) {
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
-		g.setColor(Color.BLACK);
-		g.setFont(titleFont);
-		g.drawString("UPGRADES", 100, 200);
-		g.setFont(enterFont);
-		g.drawString("ERROR", 120, 350);
-		g.drawString("You killed " + om.getScore() + " enemies", 120, 350);
-		g.drawString("Press ENTER to continue", 100, 600);
-	}
+
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);

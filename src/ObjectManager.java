@@ -6,7 +6,7 @@ import java.util.Random;
 public class ObjectManager {
 	ShootyThing cannon;
 	boolean isShooting;
-
+	Upgrades better;
 	ArrayList<Projectile> projectiles;
 	ArrayList<Emu> emus;
 	long enemyTimer = 0;
@@ -14,16 +14,19 @@ public class ObjectManager {
 	long shootTimer = 0;
 	int shootySpawnTime = 250;
 	int score;
+	public static int emubucks;
 	int crosshairX;
 	int crosshairY;
 	public static int lives;
-	public ObjectManager(ShootyThing bob) {
+	public ObjectManager(ShootyThing bob, Upgrades dave) {
 		cannon = bob;
 		projectiles = new ArrayList<Projectile>();
 		emus = new ArrayList<Emu>();
+		better = dave;
 		score = 0;
 		isShooting = false;
 		lives = 5;
+		emubucks = 0;
 	}
 
 	void update() {
@@ -40,6 +43,7 @@ public class ObjectManager {
 		}
 		
 		cannon.update();
+		better.update();
 		for (int i = 0; i < emus.size(); i++) {
 			emus.get(i).update();
 		}
@@ -47,6 +51,7 @@ public class ObjectManager {
 
 	void draw(Graphics g) {
 		cannon.draw(g);
+		better.draw(g);
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).draw(g);
 		}
@@ -68,7 +73,7 @@ public class ObjectManager {
 
 	void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addEmu(new Emu(new Random().nextInt(StuffThing.width), 0, 50, 50));
+			addEmu(new Emu(new Random().nextInt(StuffThing.width-300 ), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
 		}
 
@@ -97,6 +102,7 @@ public class ObjectManager {
 					projectiles.get(i).isAlive = false;
 					a.isAlive = false;
 					score += 1;
+					emubucks +=10;
 					System.out.println(score);
 				}
 			}

@@ -7,7 +7,7 @@ public class StuffThing {
 
 		JFrame frame;
 		static int height = 900;
-		static int width = 1500;
+		static int width = 1800;
 		GamePanel gp;
 	public static void main(String[] args) {
 		StuffThing li = new StuffThing();
