@@ -6,6 +6,7 @@ public class StuffThing {
 
 
 		JFrame frame;
+		
 		static int height = 900;
 		static int width = 1800;
 		GamePanel gp;
@@ -24,6 +25,7 @@ public class StuffThing {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setPreferredSize(new Dimension(width, height));
 		frame.pack();
+		
 		gp.startGame();
 	}
 	}   

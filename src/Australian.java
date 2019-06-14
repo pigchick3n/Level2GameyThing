@@ -1,11 +1,11 @@
 	import java.awt.Color;
 import java.awt.Graphics;
 
-	public class ShootyThing  extends GameObject{
+	public class Australian  extends GameObject{
 	double angle;
 	double angleVelocity;
 	int speed;
-		public ShootyThing(int x, int y, int width, int height) {
+		public Australian(int x, int y, int width, int height) {
 			super(x, y, width, height);
 			// TODO Auto-generated constructor stub
 			speed = 20;

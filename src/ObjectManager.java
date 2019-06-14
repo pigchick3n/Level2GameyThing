@@ -3,10 +3,12 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JButton;
+
 public class ObjectManager {
-	ShootyThing cannon;
+	Australian cannon;
 	boolean isShooting;
-	Upgrades better;
+	
 	ArrayList<Projectile> projectiles;
 	ArrayList<Emu> emus;
 	long enemyTimer = 0;
@@ -18,11 +20,13 @@ public class ObjectManager {
 	int crosshairX;
 	int crosshairY;
 	public static int lives;
-	public ObjectManager(ShootyThing bob, Upgrades dave) {
+	
+	public ObjectManager(Australian bob) {
 		cannon = bob;
 		projectiles = new ArrayList<Projectile>();
 		emus = new ArrayList<Emu>();
-		better = dave;
+
+		
 		score = 0;
 		isShooting = false;
 		lives = 5;
@@ -43,7 +47,7 @@ public class ObjectManager {
 		}
 		
 		cannon.update();
-		better.update();
+
 		for (int i = 0; i < emus.size(); i++) {
 			emus.get(i).update();
 		}
@@ -51,7 +55,6 @@ public class ObjectManager {
 
 	void draw(Graphics g) {
 		cannon.draw(g);
-		better.draw(g);
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).draw(g);
 		}

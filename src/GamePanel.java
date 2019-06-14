@@ -9,14 +9,16 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer t;
-	ShootyThing st;
+	Australian au;
+	StuffThing st;
 	ObjectManager om;
-	Upgrades u;
+
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -24,18 +26,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font enterFont;
 	double turnSpeed = 0.08;
+	JButton rof;
+	int rofTracker;
+	
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
-		st = new ShootyThing(725, 850, 50, 50);
-		om = new ObjectManager(st, u);
+		au = new Australian(725, 850, 50, 50);
+		om = new ObjectManager(au);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 25);
-
+		rof = new JButton();
+		st.gp.add(rof);
+		rof.setLocation(500, 500);
+		rof.setVisible(true);
+		rof.addActionListener(this);
+		
+		rofTracker=0;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+	
+		if(e.getSource().equals (rof) && om.emubucks>=100) {
+			om.emubucks-=100;
+			rofTracker+=5;
+			
+		}
 		if (currentState == MENU_STATE) {
 			updateMenuState();
 		} else if (currentState == GAME_STATE) {
@@ -81,20 +98,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		} else if ((keycode == 10) && (currentState == END_STATE)) {
 			currentState = MENU_STATE;
-			st = new ShootyThing(725, 850, 50, 50);
-			u = new Upgrades(0, 1500, 300,900);
-			om = new ObjectManager(st, u);
+			au = new Australian(725, 850, 50, 50);
+	
+			om = new ObjectManager(au);
 		}
 
 		if ((currentState == GAME_STATE) && (keycode == 32)) {
 			om.addProjectile(true);
 		}
 		if (keycode == 37) {
-			st.turn(-turnSpeed);
+			au.turn(-turnSpeed);
 
 		}
 		if (keycode == 39) {
-			st.turn(turnSpeed);
+			au.turn(turnSpeed);
 
 		}
 		if (keycode == 16) {
@@ -107,11 +124,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		int keycode = e.getKeyCode();
 		if (keycode == 37) {
-			st.turn(0);
+			au.turn(0);
 
 		}
 		if (keycode == 39) {
-			st.turn(0);
+			au.turn(0);
 
 		}
 		if ((currentState == GAME_STATE) && (keycode == 32)) {
@@ -128,7 +145,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 
-		if (st.isAlive == false) {
+		if (au.isAlive == false) {
 			currentState = END_STATE;
 		}
 		om.update();
@@ -149,9 +166,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
 		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
-		g.drawString("Shoot Stuff for money", 500, 200);
+		g.drawString("Survive the emu invasion", 600, 200);
 		g.setFont(enterFont);
-		g.drawString("Press ENTER to start", 615, 350);
+		g.drawString("Press ENTER to start", 800, 350);
 
 	}
 
@@ -159,7 +176,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
 		om.draw(g);
-		om.setCrosshairPosition(st.angle, g);
+		om.setCrosshairPosition(au.angle, g);
+		g.setColor(Color.WHITE);
 		g.setFont(enterFont);
 		g.drawString("You killed " + om.getScore() + " enemies", 1, 20);
 		g.drawString("You have " + ObjectManager.lives + " lives left", 300, 20);
@@ -174,6 +192,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("GAME OVER", 100, 200);
 		g.setFont(enterFont);
 		g.drawString("You killed " + om.getScore() + " enemies", 120, 350);
-		g.drawString("Press ENTER to restart", 100, 600);
+		g.drawString("Press ENTER to restart", 800, 350);
 	}
 }
