@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -15,6 +16,7 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer t;
+	ArrayList<Button> buttons;
 	Australian au;
 	StuffThing st;
 	ObjectManager om;
@@ -26,33 +28,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font enterFont;
 	double turnSpeed = 0.08;
-	JButton rof;
+	
 	int rofTracker;
 	
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
+		buttons = new ArrayList<Button>();
+		buttons.add(new Button(100,100,100,100));
 		au = new Australian(725, 850, 50, 50);
 		om = new ObjectManager(au);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 25);
-		rof = new JButton();
-		st.gp.add(rof);
-		rof.setLocation(500, 500);
-		rof.setVisible(true);
-		rof.addActionListener(this);
-		
-		rofTracker=0;
+	//	rof = new JButton();
+
+	//	rof.setLocation(500, 500);
+	//	rof.setVisible(true);
+	//	rof.addActionListener(this);
+	
+	//	rofTracker=0;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	
-		if(e.getSource().equals (rof) && om.emubucks>=100) {
-			om.emubucks-=100;
-			rofTracker+=5;
+
 			
-		}
+		
 		if (currentState == MENU_STATE) {
 			updateMenuState();
 		} else if (currentState == GAME_STATE) {
@@ -169,6 +171,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Survive the emu invasion", 600, 200);
 		g.setFont(enterFont);
 		g.drawString("Press ENTER to start", 800, 350);
+		g.drawString("Left and Right Arrow Keys to Aim", 800, 450);
+		g.drawString("Shift to lower sensitivity", 800, 550);
 
 	}
 
@@ -182,6 +186,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("You killed " + om.getScore() + " enemies", 1, 20);
 		g.drawString("You have " + ObjectManager.lives + " lives left", 300, 20);
 		g.drawString("You have " + ObjectManager.emubucks + " emubucks", 600, 20);
+		for (int i = 0; i < buttons.size(); i++) {
+			buttons.get(i).draw(g);
+		}
 	}
 
 	void drawEndState(Graphics g) {
