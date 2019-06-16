@@ -13,8 +13,8 @@ public class ObjectManager {
 	ArrayList<Emu> emus;
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
-	long shootTimer = 0;
-	int shootySpawnTime = 250;
+	long shootTimer = 1000;
+	double shootySpawnTime = 250;
 	int score;
 	public static int emubucks;
 	int crosshairX;
@@ -26,20 +26,21 @@ public class ObjectManager {
 		projectiles = new ArrayList<Projectile>();
 		emus = new ArrayList<Emu>();
 
-		
 		score = 0;
 		isShooting = false;
 		lives = 5;
-		emubucks = 0;
+		emubucks = 10000000;
 	}
-
+	void buttonStats() {
+		shootySpawnTime=250-10*GamePanel.buttons.get(0).value;
+	}
 	void update() {
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).update();
 		}
 		if (isShooting) {
 
-		if (System.currentTimeMillis() - shootTimer >= shootySpawnTime) {
+	if (System.currentTimeMillis() - shootTimer >= shootySpawnTime) {
 				Projectile p = new Projectile((int) cannon.x + 20, (int) cannon.y, 10, 10, cannon.angle);
 				projectiles.add(p);
 			shootTimer = System.currentTimeMillis();
@@ -51,6 +52,7 @@ public class ObjectManager {
 		for (int i = 0; i < emus.size(); i++) {
 			emus.get(i).update();
 		}
+		buttonStats();
 	}
 
 	void draw(Graphics g) {
@@ -87,7 +89,7 @@ public class ObjectManager {
 			if (projectiles.get(i).isAlive == false) {
 				projectiles.remove(i);
 		}
-		}
+	}
 		for (int i = 0; i < emus.size(); i++) {
 			if (emus.get(i).isAlive == false) {
 				emus.remove(i);

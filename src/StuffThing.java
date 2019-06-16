@@ -20,6 +20,7 @@ public class StuffThing {
 	}
 	void setup() {
 		frame.addKeyListener(gp);
+		frame.addMouseListener(gp);
 		frame.add(gp);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

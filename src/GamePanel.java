@@ -1,10 +1,13 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,9 +17,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener {
+public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 	Timer t;
-	ArrayList<Button> buttons;
+	public static ArrayList<Button> buttons;
 	Australian au;
 	StuffThing st;
 	ObjectManager om;
@@ -27,26 +30,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int currentState = 0;
 	Font titleFont;
 	Font enterFont;
+	Font upgradeFont;
 	double turnSpeed = 0.08;
 	
-	int rofTracker;
-	
+
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
 		buttons = new ArrayList<Button>();
-		buttons.add(new Button(100,100,100,100));
+		buttons.add(new Button(1740,10,50,50));
+		buttons.add(new Button(1740,90,50,50));
 		au = new Australian(725, 850, 50, 50);
 		om = new ObjectManager(au);
+	
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 25);
-	//	rof = new JButton();
+		upgradeFont = new Font("Arial", Font.PLAIN, 5);
 
-	//	rof.setLocation(500, 500);
-	//	rof.setVisible(true);
-	//	rof.addActionListener(this);
-	
-	//	rofTracker=0;
 	}
 
 	@Override
@@ -154,9 +154,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		om.manageEnemies();
 		om.checkCollision();
 		om.purgeObjects();
-		if (ObjectManager.lives == 0) {
-			currentState = END_STATE;
-		}
+		//if (ObjectManager.lives == 0) {
+		//	currentState = END_STATE;
+		//}
 	}
 
 	void updateEndState() {
@@ -183,9 +183,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		om.setCrosshairPosition(au.angle, g);
 		g.setColor(Color.WHITE);
 		g.setFont(enterFont);
-		g.drawString("You killed " + om.getScore() + " enemies", 1, 20);
+		g.drawString("You killed " + om.getScore() + " emus", 1, 20);
 		g.drawString("You have " + ObjectManager.lives + " lives left", 300, 20);
 		g.drawString("You have " + ObjectManager.emubucks + " emubucks", 600, 20);
+		g.setColor(Color.YELLOW);
+		g.setFont(upgradeFont);
+		g.drawString("Faster emu death things", 1775, 20);
 		for (int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).draw(g);
 		}
@@ -200,5 +203,43 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(enterFont);
 		g.drawString("You killed " + om.getScore() + " enemies", 120, 350);
 		g.drawString("Press ENTER to restart", 800, 350);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		Rectangle clicked = new Rectangle(e.getX(), e.getY()-26,1,1);
+		System.out.println(e.getX()+" "+ e.getY());
+		for (int i = 0; i < buttons.size(); i++) {
+			if(buttons.get(i).collisionBox.intersects(clicked)) {
+				buttons.get(i).buy();
+				
+			}
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

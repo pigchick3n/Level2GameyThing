@@ -12,8 +12,7 @@ double angle;
 		speed = 20;
 		this.angle = angle;
 		System.out.println(angle);
-		//speedY = speed * (1 - (Math.abs(angle / 90.0)));
-		//speedX = speed * (angle / 90.0);
+	
 		speedX = speed*Math.sin(-angle);
 		speedY = speed*Math.cos(angle);
 	}
