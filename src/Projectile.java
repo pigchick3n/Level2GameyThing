@@ -18,7 +18,7 @@ double angle;
 	}
 	void draw(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect((int)x, (int)y, width, height);
+		g.drawImage(GamePanel.pancakeImg, (int)x,(int) y, width, height, null);
 	}
 	void update() {
 		super.update();

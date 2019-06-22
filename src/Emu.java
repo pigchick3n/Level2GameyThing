@@ -4,7 +4,9 @@
 
 	public class Emu extends GameObject{
 		int speed;
-
+		int frameNum=0;
+		long animationTimer;
+		long animationCooldown=300;
 	public Emu(int x, int y, int width, int height) {
 		super(x,y,width,height);
 		speed=2;
@@ -17,9 +19,17 @@
 		ObjectManager.lives-=1;
 		System.out.println(ObjectManager.lives);
 		}
+		if (System.currentTimeMillis() - animationTimer >= animationCooldown) {
+			animationTimer = System.currentTimeMillis();
+			frameNum++;
+			if(frameNum >= GamePanel.emuRun.size()) {
+				frameNum = 0;
+			}
+		}
 	}
 	void draw(Graphics g) {
 		g.setColor(Color.red);
-		g.fillRect((int)x, (int)y, width, height);
+		g.drawImage(GamePanel.emuRun.get(frameNum),(int) x,(int) y, width, height,null);
 	}
+	
 	}

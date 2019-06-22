@@ -31,8 +31,9 @@ public class ObjectManager {
 		lives = 5;
 		emubucks = 10000000;
 	}
-	void buttonStats() {
+void buttonStats() {
 		shootySpawnTime=250-10*GamePanel.buttons.get(0).value;
+	
 	}
 	void update() {
 		for (int i = 0; i < projectiles.size(); i++) {
@@ -41,7 +42,7 @@ public class ObjectManager {
 		if (isShooting) {
 
 	if (System.currentTimeMillis() - shootTimer >= shootySpawnTime) {
-				Projectile p = new Projectile((int) cannon.x + 20, (int) cannon.y, 10, 10, cannon.angle);
+				Projectile p = new Projectile((int) cannon.x + 20, (int) cannon.y, 30, 30, cannon.angle);
 				projectiles.add(p);
 			shootTimer = System.currentTimeMillis();
 		}
@@ -78,9 +79,9 @@ public class ObjectManager {
 
 	void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addEmu(new Emu(new Random().nextInt(StuffThing.width-300 ), 0, 50, 50));
+			addEmu(new Emu(new Random().nextInt(StuffThing.width-300), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
-		}
+	}
 
 	}
 

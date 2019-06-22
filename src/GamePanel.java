@@ -20,6 +20,7 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 	Timer t;
 	public static ArrayList<Button> buttons;
+	public static ArrayList<BufferedImage> emuRun;
 	Australian au;
 	StuffThing st;
 	ObjectManager om;
@@ -32,23 +33,43 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font enterFont;
 	Font upgradeFont;
 	double turnSpeed = 0.08;
-	
+	 public static BufferedImage pancakeImg;
 
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
 		buttons = new ArrayList<Button>();
+		emuRun = new ArrayList<BufferedImage>();
 		buttons.add(new Button(1740,10,50,50));
 		buttons.add(new Button(1740,90,50,50));
+		buttons.add(new Button(1740,170,50,50));
 		au = new Australian(725, 850, 50, 50);
 		om = new ObjectManager(au);
-	
+		loadEmuAnimations();
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 25);
 		upgradeFont = new Font("Arial", Font.PLAIN, 5);
+		 try {
+	            pancakeImg = ImageIO.read(this.getClass().getResourceAsStream("pancakes.png"));
+	    } catch (IOException e) {
 
+	            // TODO Auto-generated catch block
+
+	            e.printStackTrace();
+
+	    }
 	}
-
+	void loadEmuAnimations() {
+		 try {
+			BufferedImage emuImg = ImageIO.read(this.getClass().getResourceAsStream("birdemuthing.png"));
+			for (int i = 0; i < 6; i++) {
+				emuRun.add(emuImg.getSubimage((emuImg.getWidth()/12)*i, 0, (emuImg.getWidth()/12), (emuImg.getHeight()/8)));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	
@@ -154,9 +175,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		om.manageEnemies();
 		om.checkCollision();
 		om.purgeObjects();
-		//if (ObjectManager.lives == 0) {
-		//	currentState = END_STATE;
-		//}
+		if (ObjectManager.lives == 0) {
+			currentState = END_STATE;
+		}
 	}
 
 	void updateEndState() {
@@ -216,6 +237,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 				buttons.get(i).buy();
 				
 			}
+		}
+		if(buttons.get(1).collisionBox.intersects(clicked)&&om.emubucks>=100) {
+			om.lives++;
+			om.emubucks--;
 		}
 	}
 
