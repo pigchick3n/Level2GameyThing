@@ -34,6 +34,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font upgradeFont;
 	double turnSpeed = 0.08;
 	 public static BufferedImage pancakeImg;
+	 public static BufferedImage australianImg;
+	 
 
 
 	public GamePanel() {
@@ -48,7 +50,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		loadEmuAnimations();
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 25);
-		upgradeFont = new Font("Arial", Font.PLAIN, 5);
+		upgradeFont = new Font("Arial", Font.PLAIN, 15);
 		 try {
 	            pancakeImg = ImageIO.read(this.getClass().getResourceAsStream("pancakes.png"));
 	    } catch (IOException e) {
@@ -58,12 +60,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	            e.printStackTrace();
 
 	    }
+		 try {
+	            australianImg = ImageIO.read(this.getClass().getResourceAsStream("australiansoldier.png"));
+	    } catch (IOException e) {
+
+	            // TODO Auto-generated catch block
+
+	            e.printStackTrace();
+
+	    }
+	
 	}
+
+
 	void loadEmuAnimations() {
 		 try {
 			BufferedImage emuImg = ImageIO.read(this.getClass().getResourceAsStream("birdemuthing.png"));
 			for (int i = 0; i < 6; i++) {
-				emuRun.add(emuImg.getSubimage((emuImg.getWidth()/12)*i, 0, (emuImg.getWidth()/12), (emuImg.getHeight()/8)));
+				emuRun.add(emuImg.getSubimage((emuImg.getWidth()/12)*(i+4), 0, (emuImg.getWidth()/12), (emuImg.getHeight()/8)));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -194,6 +208,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.drawString("Press ENTER to start", 800, 350);
 		g.drawString("Left and Right Arrow Keys to Aim", 800, 450);
 		g.drawString("Shift to lower sensitivity", 800, 550);
+		g.drawString("Shift to lower sensitivity", 800, 550);
 
 	}
 
@@ -209,7 +224,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.drawString("You have " + ObjectManager.emubucks + " emubucks", 600, 20);
 		g.setColor(Color.YELLOW);
 		g.setFont(upgradeFont);
-		g.drawString("Faster emu death things", 1775, 20);
+		g.drawString("Faster emu death things", 1775, 200);
 		for (int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).draw(g);
 		}
