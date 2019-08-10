@@ -42,15 +42,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		t = new Timer(1000 / 60, this);
 		buttons = new ArrayList<Button>();
 		emuRun = new ArrayList<BufferedImage>();
-		buttons.add(new Button(1740,10,50,50));
-		buttons.add(new Button(1740,90,50,50));
-		buttons.add(new Button(1740,170,50,50));
+		buttons.add(new Button(1740,20,50,50, "More Pancakes"));
+		buttons.add(new Button(1740,100,50,50, "More Lives"));
+		buttons.add(new Button(1740,180,50,50,"Useless Button"));
 		au = new Australian(725, 850, 50, 50);
 		om = new ObjectManager(au);
 		loadEmuAnimations();
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 25);
-		upgradeFont = new Font("Arial", Font.PLAIN, 15);
+		upgradeFont = new Font("Arial", Font.PLAIN, 20);
 		 try {
 	            pancakeImg = ImageIO.read(this.getClass().getResourceAsStream("pancakes.png"));
 	    } catch (IOException e) {
@@ -224,7 +224,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.drawString("You have " + ObjectManager.emubucks + " emubucks", 600, 20);
 		g.setColor(Color.YELLOW);
 		g.setFont(upgradeFont);
-		g.drawString("Faster emu death things", 1775, 200);
+		
 		for (int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).draw(g);
 		}

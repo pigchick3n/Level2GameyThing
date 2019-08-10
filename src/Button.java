@@ -3,9 +3,13 @@ import java.awt.Graphics;
 
 public class Button extends GameObject{
 	int value;
-	public Button(int x, int y, int width, int height) {
+	String name;
+	int textOffset;
+	public Button(int x, int y, int width, int height, String name) {
 		super(x,y,width,height);
 		value= 1;
+		this.name=name;
+		textOffset= name.length()*6;
 }
 	void update() {
 
@@ -22,6 +26,8 @@ public class Button extends GameObject{
 		
 		g.setColor(Color.WHITE);
 		g.fillRect((int)x, (int)y, width, height);
+		
+		g.drawString(name,(int) x-textOffset,(int)y-4);
 		super.draw(g);
 	}
 }

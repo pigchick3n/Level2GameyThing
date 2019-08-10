@@ -29,7 +29,7 @@ public class ObjectManager {
 		score = 0;
 		isShooting = false;
 		lives = 5;
-		emubucks = 10000000;
+		emubucks = 0;
 	}
 void buttonStats() {
 		shootySpawnTime=250-10*GamePanel.buttons.get(0).value;
