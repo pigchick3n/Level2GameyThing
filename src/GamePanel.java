@@ -77,7 +77,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		 try {
 			BufferedImage emuImg = ImageIO.read(this.getClass().getResourceAsStream("birdemuthing.png"));
 			for (int i = 0; i < 6; i++) {
-				emuRun.add(emuImg.getSubimage((emuImg.getWidth()/12)*(i+4), 0, (emuImg.getWidth()/12), (emuImg.getHeight()/8)));
+				emuRun.add(emuImg.getSubimage((emuImg.getWidth()/12)*(i+6), 0, (emuImg.getWidth()/12), (emuImg.getHeight()/8)));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -253,9 +253,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 				
 			}
 		}
-		if(buttons.get(1).collisionBox.intersects(clicked)&&om.emubucks>=100) {
-			om.lives++;
-			om.emubucks--;
+		if(buttons.get(1).collisionBox.intersects(clicked)&&ObjectManager.emubucks>=100) {
+			ObjectManager.lives++;
+			ObjectManager.emubucks-=100;
 		}
 	}
 

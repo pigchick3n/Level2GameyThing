@@ -11,6 +11,7 @@ public class ObjectManager {
 	
 	ArrayList<Projectile> projectiles;
 	ArrayList<Emu> emus;
+	long stage = 0;
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
 	long shootTimer = 1000;
@@ -65,8 +66,8 @@ void buttonStats() {
 			emus.get(i).draw(g);
 		}
 
-		g.setColor(Color.RED);
-		g.fillRect(crosshairX, crosshairY, 10, 10);
+		//g.setColor(Color.RED);
+		//g.fillRect(crosshairX, crosshairY, 10, 10);
 	}
 
 	void addProjectile(boolean b) {
@@ -78,10 +79,17 @@ void buttonStats() {
 	}
 
 	void manageEnemies() {
+		stage = System.currentTimeMillis()/10000;
+		if (stage <= 1) { 
+			enemySpawnTime = 0;
+		}else {
+			enemySpawnTime = 1000;
+	}
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
 			addEmu(new Emu(new Random().nextInt(StuffThing.width-300), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
-	}
+	
+		}
 
 	}
 
