@@ -79,16 +79,12 @@ void buttonStats() {
 	}
 
 	void manageEnemies() {
-		stage = System.currentTimeMillis()/10000;
-		if (stage <= 1) { 
-			enemySpawnTime = 0;
-		}else {
-			enemySpawnTime = 1000;
-	}
+		
+	
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
 			addEmu(new Emu(new Random().nextInt(StuffThing.width-300), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
-	
+			enemySpawnTime-=10;
 		}
 
 	}
