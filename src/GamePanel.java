@@ -33,63 +33,59 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font enterFont;
 	Font upgradeFont;
 	double turnSpeed = 0.08;
-	 public static BufferedImage pancakeImg;
-	 public static BufferedImage australianImg;
-	 
-
+	public static BufferedImage pancakeImg;
+	public static BufferedImage australianImg;
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
 		buttons = new ArrayList<Button>();
 		emuRun = new ArrayList<BufferedImage>();
-		buttons.add(new Button(1740,20,50,50, "More Pancakes"));
-		buttons.add(new Button(1740,100,50,50, "More Lives"));
-		buttons.add(new Button(1740,180,50,50,"Useless Button"));
+		buttons.add(new Button(1740, 20, 50, 50, "More Pancakes", "A"));
+		buttons.add(new Button(1740, 100, 50, 50, "More Lives", "S"));
+		buttons.add(new Button(1740, 180, 50, 50, "Tough Pancakes", "D"));
 		au = new Australian(725, 850, 50, 50);
 		om = new ObjectManager(au);
 		loadEmuAnimations();
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 25);
 		upgradeFont = new Font("Arial", Font.PLAIN, 20);
-		 try {
-	            pancakeImg = ImageIO.read(this.getClass().getResourceAsStream("pancakes.png"));
-	    } catch (IOException e) {
+		try {
+			pancakeImg = ImageIO.read(this.getClass().getResourceAsStream("pancakes.png"));
+		} catch (IOException e) {
 
-	            // TODO Auto-generated catch block
+			// TODO Auto-generated catch block
 
-	            e.printStackTrace();
+			e.printStackTrace();
 
-	    }
-		 try {
-	            australianImg = ImageIO.read(this.getClass().getResourceAsStream("australiansoldier.png"));
-	    } catch (IOException e) {
+		}
+		try {
+			australianImg = ImageIO.read(this.getClass().getResourceAsStream("australiansoldier.png"));
+		} catch (IOException e) {
 
-	            // TODO Auto-generated catch block
+			// TODO Auto-generated catch block
 
-	            e.printStackTrace();
+			e.printStackTrace();
 
-	    }
-	
+		}
+
 	}
 
-
 	void loadEmuAnimations() {
-		 try {
+		try {
 			BufferedImage emuImg = ImageIO.read(this.getClass().getResourceAsStream("birdemuthing.png"));
 			for (int i = 0; i < 6; i++) {
-				emuRun.add(emuImg.getSubimage((emuImg.getWidth()/12)*(i+6), 0, (emuImg.getWidth()/12), (emuImg.getHeight()/8)));
+				emuRun.add(emuImg.getSubimage((emuImg.getWidth() / 12) * (i + 6), 0, (emuImg.getWidth() / 12),
+						(emuImg.getHeight() / 8)));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	
 
-			
-		
 		if (currentState == MENU_STATE) {
 			updateMenuState();
 		} else if (currentState == GAME_STATE) {
@@ -136,7 +132,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		} else if ((keycode == 10) && (currentState == END_STATE)) {
 			currentState = MENU_STATE;
 			au = new Australian(725, 850, 50, 50);
-	
+
 			om = new ObjectManager(au);
 		}
 
@@ -153,6 +149,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		}
 		if (keycode == 16) {
 			turnSpeed = 0.02;
+		}
+		if (keycode == 65) {
+			buttons.get(0).buy();
+		}
+		if (keycode == 83) {
+			buttons.get(1).buy();
+			ObjectManager.lives++;
+		}
+		if (keycode == 68) {
+			buttons.get(2).buy();
 		}
 	}
 
@@ -208,7 +214,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.drawString("Press ENTER to start", 800, 350);
 		g.drawString("Left and Right Arrow Keys to Aim", 800, 450);
 		g.drawString("Shift to lower sensitivity", 800, 550);
-		g.drawString("Shift to lower sensitivity", 800, 550);
+		g.drawString("Space to shoot pancakes", 800, 650);
 
 	}
 
@@ -224,7 +230,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.drawString("You have " + ObjectManager.emubucks + " emubucks", 600, 20);
 		g.setColor(Color.YELLOW);
 		g.setFont(upgradeFont);
-		
+
 		for (int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).draw(g);
 		}
@@ -244,42 +250,41 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-		Rectangle clicked = new Rectangle(e.getX(), e.getY()-26,1,1);
-		System.out.println(e.getX()+" "+ e.getY());
+
+		Rectangle clicked = new Rectangle(e.getX(), e.getY() - 26, 1, 1);
+		System.out.println(e.getX() + " " + e.getY());
 		for (int i = 0; i < buttons.size(); i++) {
-			if(buttons.get(i).collisionBox.intersects(clicked)) {
+			if (buttons.get(i).collisionBox.intersects(clicked)) {
 				buttons.get(i).buy();
-				
+				if (i == 1) {
+					ObjectManager.lives++;
+				}
 			}
 		}
-		if(buttons.get(1).collisionBox.intersects(clicked)&&ObjectManager.emubucks>=100) {
-			ObjectManager.lives++;
-			ObjectManager.emubucks-=100;
-		}
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

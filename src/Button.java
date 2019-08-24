@@ -4,12 +4,15 @@ import java.awt.Graphics;
 public class Button extends GameObject{
 	int value;
 	String name;
+	String key;
 	int textOffset;
-	public Button(int x, int y, int width, int height, String name) {
+	public Button(int x, int y, int width, int height, String name, String key) {
 		super(x,y,width,height);
 		value= 1;
 		this.name=name;
+		this.key = key;
 		textOffset= name.length()*6;
+		
 }
 	void update() {
 
@@ -29,5 +32,8 @@ public class Button extends GameObject{
 		
 		g.drawString(name,(int) x-textOffset,(int)y-4);
 		super.draw(g);
+		
+		g.drawString(key, (int)x+15, (int)y+20);
+		g.drawString(value + "", (int)x + 15,(int)y +40);
 	}
 }

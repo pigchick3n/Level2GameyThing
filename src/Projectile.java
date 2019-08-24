@@ -6,10 +6,12 @@ public class Projectile extends GameObject {
 	double speedY;
 	double speedX;
 double angle;
+int health;
 
 	public Projectile(int x, int y, int width, int height, double angle) {
 		super(x, y, width, height);
 		speed = 20;
+		health = GamePanel.buttons.get(2).value;
 		this.angle = angle;
 		System.out.println(angle);
 	
@@ -22,9 +24,14 @@ double angle;
 	}
 	void update() {
 		super.update();
-
+		if(x>=StuffThing.width||x<=0||y>=StuffThing.height||y<=0) {
+			this.isAlive = false;	
+		}
 		y += speedY;
 
 		x += speedX;
+	}
+	void hit() {
+		health--;
 	}
 }

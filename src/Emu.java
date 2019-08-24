@@ -6,7 +6,7 @@
 		int speed;
 		int frameNum=0;
 		long animationTimer;
-		long animationCooldown=300;
+		long animationCooldown=100;
 	public Emu(int x, int y, int width, int height) {
 		super(x,y,width,height);
 		speed=2;
