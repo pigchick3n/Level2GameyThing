@@ -30,7 +30,7 @@ public class ObjectManager {
 		score = 0;
 		isShooting = false;
 		lives = 5;
-		emubucks = 10000;
+		emubucks = 0;
 	}
 
 	void buttonStats() {

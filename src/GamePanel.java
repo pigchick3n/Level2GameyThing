@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	double turnSpeed = 0.08;
 	public static BufferedImage pancakeImg;
 	public static BufferedImage australianImg;
+	public static BufferedImage emuwinImg;
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
@@ -51,6 +52,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		upgradeFont = new Font("Arial", Font.PLAIN, 20);
 		try {
 			pancakeImg = ImageIO.read(this.getClass().getResourceAsStream("pancakes.png"));
+		} catch (IOException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+		}
+		try {
+			emuwinImg = ImageIO.read(this.getClass().getResourceAsStream("coolemu.jpg"));
 		} catch (IOException e) {
 
 			// TODO Auto-generated catch block
@@ -142,22 +152,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (keycode == 37) {
 			au.turn(-turnSpeed);
 
-		}
-		if (keycode == 39) {
+		}else if (keycode == 39) {
 			au.turn(turnSpeed);
 
-		}
-		if (keycode == 16) {
+		}else if (keycode == 16) {
 			turnSpeed = 0.02;
-		}
-		if (keycode == 65) {
+		}else if (keycode == 65) {
 			buttons.get(0).buy();
-		}
-		if (keycode == 83) {
+		}else if (keycode == 83 && om.emubucks>=100) {
 			buttons.get(1).buy();
 			ObjectManager.lives++;
-		}
-		if (keycode == 68) {
+		}else if (keycode == 68) {
 			buttons.get(2).buy();
 		}
 	}
@@ -201,7 +206,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	}
 
 	void updateEndState() {
-
+		for (int i = 0; i < buttons.size(); i++) {
+			buttons.get(i).value = 0;
+		}
 	}
 
 	void drawMenuState(Graphics g) {
@@ -209,12 +216,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
 		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
-		g.drawString("Survive the emu invasion", 600, 200);
+		g.drawString("Don't get trampled by EMUS", 600, 200);
 		g.setFont(enterFont);
-		g.drawString("Press ENTER to start", 800, 350);
-		g.drawString("Left and Right Arrow Keys to Aim", 800, 450);
-		g.drawString("Shift to lower sensitivity", 800, 550);
-		g.drawString("Space to shoot pancakes", 800, 650);
+		g.drawString("Press ENTER to start :)", 800, 350);
+		g.drawString("Left and Right Arrow Keys to Aim :)", 730, 450);
+		g.drawString("SHIFT to lower sensitivity :)", 785, 550);
+		g.drawString("SPACE to shoot pancakes :)", 790, 650);
+		g.drawString("To upgrade, click button or press corresponding key :)", 650, 750);
 
 	}
 
@@ -241,10 +249,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
-		g.drawString("GAME OVER", 100, 200);
+		g.drawString("GAME OVER", 800, 200);
 		g.setFont(enterFont);
-		g.drawString("You killed " + om.getScore() + " enemies", 120, 350);
-		g.drawString("Press ENTER to restart", 800, 350);
+		g.drawString("You killed " + om.getScore() + " enemies", 800, 300);
+		g.drawString("You're still dead tho :(", 800, 320);
+		g.drawString("Press ENTER to restart", 800, 400);
+		g.drawImage(emuwinImg, 100,100, 300, 300, null);
 	}
 
 	@Override
@@ -256,7 +266,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		for (int i = 0; i < buttons.size(); i++) {
 			if (buttons.get(i).collisionBox.intersects(clicked)) {
 				buttons.get(i).buy();
-				if (i == 1) {
+				if (i == 1 && om.emubucks >= 100) {
 					ObjectManager.lives++;
 				}
 			}
