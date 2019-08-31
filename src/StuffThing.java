@@ -1,6 +1,7 @@
 	import java.awt.Dimension;
+import java.awt.Graphics;
 
-	import javax.swing.JFrame;
+import javax.swing.JFrame;
 
 public class StuffThing {
 
@@ -17,6 +18,9 @@ public class StuffThing {
 	public StuffThing(){
 		frame = new JFrame();
 		gp = new GamePanel();
+	}
+	void draw(Graphics g) {
+		 g.drawImage(GamePanel.backgroundImg, 0,0, width, height, null);
 	}
 	void setup() {
 		frame.addKeyListener(gp);

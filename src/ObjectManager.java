@@ -30,7 +30,7 @@ public class ObjectManager {
 		score = 0;
 		isShooting = false;
 		lives = 5;
-		emubucks = 0;
+		emubucks = 10000000;
 	}
 
 	void buttonStats() {
@@ -83,7 +83,9 @@ public class ObjectManager {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
 			addEmu(new Emu(new Random().nextInt(StuffThing.width - 300), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
-			enemySpawnTime -= 5;
+			if (enemySpawnTime >=5) {
+				enemySpawnTime -= 5;
+			}
 		}
 
 	}

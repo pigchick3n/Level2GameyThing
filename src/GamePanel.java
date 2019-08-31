@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static BufferedImage pancakeImg;
 	public static BufferedImage australianImg;
 	public static BufferedImage emuwinImg;
+	public static BufferedImage backgroundImg;
 
 	public GamePanel() {
 		t = new Timer(1000 / 60, this);
@@ -52,6 +53,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		upgradeFont = new Font("Arial", Font.PLAIN, 20);
 		try {
 			pancakeImg = ImageIO.read(this.getClass().getResourceAsStream("pancakes.png"));
+		} catch (IOException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+		}
+		try {
+			backgroundImg = ImageIO.read(this.getClass().getResourceAsStream("background.jpg"));
 		} catch (IOException e) {
 
 			// TODO Auto-generated catch block
