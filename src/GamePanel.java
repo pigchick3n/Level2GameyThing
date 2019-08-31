@@ -226,19 +226,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
 		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
-		g.drawString("Don't get trampled by EMUS", 600, 200);
+		g.drawString("THE EMUS ARE COMING.", 600, 200);
 		g.setFont(enterFont);
 		g.drawString("Press ENTER to start :)", 800, 350);
 		g.drawString("Left and Right Arrow Keys to Aim :)", 730, 450);
-		g.drawString("SHIFT to lower sensitivity :)", 785, 550);
-		g.drawString("SPACE to shoot pancakes :)", 790, 650);
+		g.drawString("SHIFT to turn slower :)", 785, 550);
+		g.drawString("HOLD DOWN!!! SPACE to shoot pancakes :)", 790, 650);
 		g.drawString("To upgrade, click button or press corresponding key :)", 650, 750);
+		g.drawString("All upgrades cost 100 emubucks and killing an emu gives 10 emubucks:)", 650, 800);
+		g.drawString("For example, press A to increase rate of fire :)", 650, 850);
 
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
+		 g.drawImage(GamePanel.backgroundImg, 0,0, st.width, st.height, null);
+		
 		om.draw(g);
 		om.setCrosshairPosition(au.angle, g);
 		g.setColor(Color.WHITE);
@@ -252,6 +254,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		for (int i = 0; i < buttons.size(); i++) {
 			buttons.get(i).draw(g);
 		}
+		
 	}
 
 	void drawEndState(Graphics g) {

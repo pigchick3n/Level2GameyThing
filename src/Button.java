@@ -14,9 +14,7 @@ public class Button extends GameObject{
 		textOffset= name.length()*6;
 		
 }
-	void update() {
 
-	}
 	void buy() {
 		if(ObjectManager.emubucks>=100) {
 			value++;
