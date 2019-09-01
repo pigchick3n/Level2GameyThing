@@ -24,7 +24,7 @@ int health;
 	}
 	void update() {
 		super.update();
-		if(x>=StuffThing.width||x<=0||y>=StuffThing.height||y<=0) {
+		if(x>=Enemus.width||x<=0||y>=Enemus.height||y<=0) {
 			this.isAlive = false;	
 		}
 		y += speedY;

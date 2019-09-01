@@ -81,7 +81,7 @@ public class ObjectManager {
 	void manageEnemies() {
 
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addEmu(new Emu(new Random().nextInt(StuffThing.width - 300), 0, 50, 50));
+			addEmu(new Emu(new Random().nextInt(Enemus.width - 300), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
 			if (enemySpawnTime >=4) {
 				enemySpawnTime -= 4;

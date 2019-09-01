@@ -22,12 +22,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static ArrayList<Button> buttons;
 	public static ArrayList<BufferedImage> emuRun;
 	Australian au;
-	StuffThing st;
+	Enemus st;
 	ObjectManager om;
 
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
+	final int WIN_STATE = 3;
 	int currentState = 0;
 	Font titleFont;
 	Font enterFont;
@@ -112,7 +113,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			updateGameState();
 		} else if (currentState == END_STATE) {
 			updateEndState();
-		}
+	} else if (currentState == WIN_STATE) {
+		updateWinState();
+	}
 		repaint();
 
 	}
@@ -130,7 +133,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			drawGameState(g);
 		} else if (currentState == END_STATE) {
 			drawEndState(g);
-		}
+	} else if (currentState == WIN_STATE) {
+		drawWinState(g);
+	}
 	}
 
 	@Override
@@ -150,6 +155,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			currentState = END_STATE;
 
 		} else if ((keycode == 10) && (currentState == END_STATE)) {
+			currentState = MENU_STATE;
+		} else if ((keycode == 10) && (currentState == WIN_STATE)) {
 			currentState = MENU_STATE;
 			au = new Australian(725, 850, 50, 50);
 
@@ -213,6 +220,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		if (ObjectManager.lives == 0) {
 			currentState = END_STATE;
 		}
+		if(om.score == 725000) {
+			currentState = WIN_STATE;
+		}
 	}
 
 	void updateEndState() {
@@ -220,10 +230,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			buttons.get(i).value = 0;
 		}
 	}
+	void updateWinState() {
+		
+	}
 
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
+		g.fillRect(0, 0, Enemus.width, Enemus.height);
 		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
 		g.drawString("THE EMUS ARE COMING.", 600, 200);
@@ -259,7 +272,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
-		g.fillRect(0, 0, StuffThing.width, StuffThing.height);
+		g.fillRect(0, 0, Enemus.width, Enemus.height);
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
 		g.drawString("GAME OVER", 800, 200);
@@ -268,6 +281,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.drawString("You're still dead tho :(", 800, 320);
 		g.drawString("Press ENTER to restart", 800, 400);
 		g.drawImage(emuwinImg, 100,100, 300, 300, null);
+	}
+	void drawWinState(Graphics g) {
+		g.setColor(Color.MAGENTA);
+		g.fillRect(0, 0, Enemus.width, Enemus.height);
+		g.setColor(Color.BLACK);
+		g.setFont(titleFont);
+		g.drawString("YOU KILLED EVERY SINGLE EMU", 300, 200);
+		g.setFont(enterFont);
+		g.drawString("You win now celebrate youve been playing this game for much too long", 800, 300);
+		g.drawString("You did massacre a whole species tho :(", 800, 320);
+		g.drawString("Press ENTER to restart", 800, 400);
+	
 	}
 
 	@Override

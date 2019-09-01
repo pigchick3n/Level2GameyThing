@@ -3,7 +3,7 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
-public class StuffThing {
+public class Enemus {
 
 
 		JFrame frame;
@@ -12,10 +12,10 @@ public class StuffThing {
 		static int width = 1800;
 		GamePanel gp;
 	public static void main(String[] args) {
-		StuffThing li = new StuffThing();
+		Enemus li = new Enemus();
 		li.setup();
 	}
-	public StuffThing(){
+	public Enemus(){
 		frame = new JFrame();
 		gp = new GamePanel();
 	}
