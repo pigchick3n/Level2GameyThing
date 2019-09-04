@@ -156,6 +156,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 		} else if ((keycode == 10) && (currentState == END_STATE)) {
 			currentState = MENU_STATE;
+			currentState = MENU_STATE;
+			au = new Australian(725, 850, 50, 50);
+
+			om = new ObjectManager(au);
 		} else if ((keycode == 10) && (currentState == WIN_STATE)) {
 			currentState = MENU_STATE;
 			au = new Australian(725, 850, 50, 50);
