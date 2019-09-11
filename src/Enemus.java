@@ -1,4 +1,4 @@
-	import java.awt.Dimension;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
@@ -14,6 +14,7 @@ public class Enemus {
 	public static void main(String[] args) {
 		Enemus li = new Enemus();
 		li.setup();
+		System.out.println("sup");
 	}
 	public Enemus(){
 		frame = new JFrame();
@@ -31,8 +32,10 @@ public class Enemus {
 		frame.getContentPane().setPreferredSize(new Dimension(width, height));
 		frame.pack();
 		
+	//bruh
 		gp.startGame();
 	}
+	
 	}   
 
 
